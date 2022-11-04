@@ -1,0 +1,24 @@
+.header {
+    position: sticky;
+    top: 0;
+    margin: 0;
+    box-sizing: content-box;
+    z-index: 100;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+@media screen and (max-width: 684px) {
+    .header {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        width: 100%;
+    }
+}

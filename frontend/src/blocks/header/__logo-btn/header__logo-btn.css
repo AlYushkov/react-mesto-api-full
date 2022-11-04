@@ -1,0 +1,17 @@
+.header__logo-btn {
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+    align-items: flex-start;
+    padding: 45px 0px 40px 0px;
+    width: 142px;
+    border: 0;
+    background: #000000;
+    cursor: pointer;
+}
+@media screen and (max-width: 684px) {
+    .header__logo-btn {
+        padding: 28px 0px 31.6px 0px;
+        width: 103.74px;
+    }
+}

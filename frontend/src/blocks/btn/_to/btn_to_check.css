@@ -1,0 +1,12 @@
+.btn_to_check {
+    margin: 0;
+    width: 22px;
+    height: 19px;
+    align-self: flex-end;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
+        url(../../../images/Group.svg) no-repeat center / contain;
+}
+.btn_to_check:active {
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
+        url(../../../images/Union.svg) no-repeat center / contain;
+}

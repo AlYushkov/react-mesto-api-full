@@ -1,0 +1,23 @@
+.formset {
+    position: relative;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: auto auto;
+    padding: 0px 36px;
+    max-width: 430px;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-content: center;
+    color: #ffffff;
+}
+@media screen and (max-width: 680px) {
+    .formset {
+        padding: 0px 22px;
+    }
+}
+@media screen and (max-width: 480px) {
+    .formset {
+        max-width: 280px;
+    }
+}

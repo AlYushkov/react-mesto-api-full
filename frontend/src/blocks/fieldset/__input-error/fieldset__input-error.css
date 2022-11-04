@@ -1,0 +1,27 @@
+.fieldset__input-error {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    left: 0;
+    right: 0;
+    top: 86px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: "Inter", "Arial", "sans-serif";
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: 0em;
+    text-align: left;
+    max-width: 358px;
+    white-space: normal;
+    color: #ff0000;
+    z-index: 10;
+}
+
+@media screen and (max-width: 480px) {
+    .fieldset__input-error {
+        max-width: 238px;
+    }
+}

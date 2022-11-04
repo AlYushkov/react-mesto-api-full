@@ -1,0 +1,27 @@
+.popup-message__title {
+    margin: 0 auto;
+    padding-top: 32px;
+    padding-bottom: 60px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: "Inter", "Arial", "sans-serif";
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 29px;
+    letter-spacing: 0em;
+    text-align: center;
+    width: 358px;
+}
+
+@media screen and (max-width: 680px) {
+    .popup-message__title {
+        padding-top: 40px;
+        padding-bottom: 50px;
+        font-size: 20px;
+        font-weight: 900;
+        line-height: 24px;
+        letter-spacing: 0em;
+        text-align: center;
+        width: 244px;
+    }
+}

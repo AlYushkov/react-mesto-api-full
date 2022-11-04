@@ -1,0 +1,18 @@
+.btn_to_save-white {
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 2px;
+    margin: 216px auto 15px auto;
+}
+
+@media screen and (max-width: 480px) {
+    .btn_to_save {
+        margin: 172px auto 25px auto;
+        width: 230px;
+        height: 48px;
+    }
+}
+
+.btn_to_white-disabled:hover {
+    opacity: 85%;
+}

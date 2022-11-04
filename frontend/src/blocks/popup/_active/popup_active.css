@@ -1,0 +1,15 @@
+.popup_active {
+    visibility: visible;
+    animation-name: active;
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes active {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

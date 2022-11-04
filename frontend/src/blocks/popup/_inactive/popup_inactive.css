@@ -1,0 +1,17 @@
+.popup_inactive {
+    visibility: hidden;
+    animation-name: inactive;
+    animation-duration: 0.5s;
+}
+
+@keyframes inactive {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 0;
+    }
+}

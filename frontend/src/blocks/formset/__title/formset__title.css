@@ -1,0 +1,22 @@
+.formset__title {
+    margin: 0;
+    padding: 34px 0px 0px 0px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: "Inter", "Arial", "sans-serif";
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1.2083;
+    letter-spacing: 0em;
+    text-align: center;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 480px) {
+    .formset__title {
+        padding: 25px 0px 0px 0px;
+        font-size: 18px;
+        font-weight: 900;
+        line-height: 1.222;
+    }
+}

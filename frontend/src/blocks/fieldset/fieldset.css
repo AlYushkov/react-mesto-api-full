@@ -1,0 +1,12 @@
+.fieldset {
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    border: 0;
+    width: 350px;
+}
+@media screen and (max-width: 480px) {
+    .fieldset {
+        max-width: 238px;
+    }
+}

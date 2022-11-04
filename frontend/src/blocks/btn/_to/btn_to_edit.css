@@ -1,0 +1,17 @@
+.btn_to_edit {
+    margin: 37px 0px 0px 0px;
+    width: 24.5px;
+    height: 24.5px;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
+        url(../../../images/Edit-Button.svg) no-repeat center / contain;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+@media screen and (max-width: 484px) {
+    .btn_to_edit {
+        margin: 34px 19px 0px 0px;
+        width: 18px;
+        height: 18px;
+        justify-self: start;
+    }
+}

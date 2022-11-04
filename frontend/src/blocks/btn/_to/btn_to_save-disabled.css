@@ -1,0 +1,10 @@
+.btn_to_save-disabled {
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+    border: 1px solid #000000;
+    border-radius: 2px;
+    opacity: 20%;
+    cursor: default;
+}
+.btn_to_save-disabled:hover {
+    opacity: 20%;
+}

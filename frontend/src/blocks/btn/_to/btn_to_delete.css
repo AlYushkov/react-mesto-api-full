@@ -1,0 +1,10 @@
+.btn_to_delete {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 18px;
+    height: 19px;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
+        url(../../../images/Trash.svg) no-repeat center / contain;
+    z-index: 10;
+}

@@ -1,0 +1,28 @@
+.header__navbar {
+    padding: 45px 0px 40px 0px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 1fr;
+    column-gap: 24px;
+    row-gap: 0px;
+    justify-items: right;
+    align-items: center;
+}
+
+@media screen and (max-width: 684px) {
+    .header__navbar {
+        width: 100%;
+        padding: 28px 0px 31.6px 0px;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        justify-items: center;
+        align-items: center;
+        column-gap: 0px;
+        row-gap: 18px;
+        align-self: center;
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+        border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+    }
+}

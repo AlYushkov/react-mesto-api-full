@@ -1,0 +1,37 @@
+.profile {
+    position: relative;
+    box-sizing: border-box;
+    padding: 40px 0px 0px 0px;
+    display: grid;
+    grid-template-rows: 120px;
+    grid-template-columns: 120px 336px 1fr;
+    column-gap: 30px;
+    justify-items: end;
+    align-items: start;
+}
+@media screen and (max-width: 1072px) {
+    .profile {
+        padding: 40px 0px 0px 0px;
+    }
+}
+@media screen and (max-width: 864px) {
+    .profile {
+        padding: 42px 10px 0px 0px;
+        grid-template-columns: 120px 336px;
+        grid-template-rows: 120px 1fr;
+    }
+}
+@media screen and (max-width: 740px) {
+    .profile {
+        grid-template-columns: 1fr;
+        grid-template-rows: 120px auto auto auto;
+        column-gap: 0;
+        justify-items: center;
+        align-items: start;
+    }
+}
+@media screen and (max-width: 480px) {
+    .profile {
+        padding: 42px 0px 0px 0px;
+    }
+}

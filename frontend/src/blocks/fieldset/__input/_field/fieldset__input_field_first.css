@@ -1,0 +1,9 @@
+.fieldset__input_field_first {
+    margin-top: 54px;
+}
+
+@media screen and (max-width: 320px) {
+    .fieldset__input_field_first {
+        margin-top: 75px;
+    }
+}
