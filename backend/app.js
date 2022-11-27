@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 
 const corsOptions = {
-  origin: 'http://localhost:5000',
+  origin: ['http://localhost:5000', 'https://mesta.students.nomoredomains.club'], 
   optionsSuccessStatus: 200,
   credentials: true,
 };
@@ -14,7 +14,7 @@ const rateLimit = require('express-rate-limit');
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100
- });
+});
 
 
 const { celebrate, Joi, errors } = require('celebrate');
@@ -33,7 +33,7 @@ const userRouter = require('./routes/users');
 
 const cardRouter = require('./routes/cards');
 
-const { createUser, login, logout, verifyAccess } = require('./controllers/users');
+const { createUser, login, logout } = require('./controllers/users');
 
 const { AppError, appErrors } = require('./utils/app-error');
 
