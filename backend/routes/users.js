@@ -12,7 +12,7 @@ const {
   getUser, getUsers, updateUser, updateAvatar, getMe, verifyAccess,
 } = require('../controllers/users');
 
-userRouter.get('/access', verifyAccess);
+userRouter.get('/access', access, verifyAccess);
 
 userRouter.get('/me', auth, getMe);
 

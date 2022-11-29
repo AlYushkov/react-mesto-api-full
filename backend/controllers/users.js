@@ -184,11 +184,5 @@ module.exports.logout = (req, res) => {
 };
 
 module.exports.verifyAccess = (req, res) => {
-  let payload = null;
-    const token = req.cookies.jwt;
-    if (token) {
-        payload = jwt.verify(token,  NODE_ENV === 'production' ? JWT_SECRET : DEV_JWT_SECRET);
-    }
-    req.user = payload;
   res.send({ data: req.user });
 }

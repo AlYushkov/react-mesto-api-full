@@ -3,7 +3,10 @@ const express = require('express');
 const cors = require('cors');
 
 const corsOptions = {
-  origin: ['http://localhost:5000', 'https://mesta.students.nomoredomains.club'], 
+  origin: ['http://localhost:5000', 
+  'http://mesta.students.nomoredomains.club', 
+  'https://mesta.students.nomoredomains.club',
+  'http://localhost:3000'], 
   optionsSuccessStatus: 200,
   credentials: true,
 };
