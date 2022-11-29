@@ -184,5 +184,13 @@ module.exports.logout = (req, res) => {
 };
 
 module.exports.verifyAccess = (req, res) => {
+  const { origin } = req.headers;
+  const allowedCors =  ['http://localhost:5000', 
+  'http://mesta.students.nomoredomains.club',
+  'https://mesta.students.nomoredomains.club',
+  'http://localhost:3000']
+  if (allowedCors.includes(origin)) {
+      res.header('Access-Control-Allow-Origin', origin);
+  }
   res.send({ data: req.user });
 }
