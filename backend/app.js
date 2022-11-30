@@ -3,22 +3,20 @@ const express = require('express');
 const cors = require('cors');
 
 const corsOptions = {
-  origin: ['http://localhost:5000', 
-  'http://mesta.students.nomoredomains.club', 
-  'https://mesta.students.nomoredomains.club',
-  'http://localhost:3000'], 
+  origin: ['http://localhost:5000',
+    'http://mesta.students.nomoredomains.club',
+    'https://mesta.students.nomoredomains.club',
+    'http://localhost:3000'],
   optionsSuccessStatus: 200,
   credentials: true,
 };
-
 
 const rateLimit = require('express-rate-limit');
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100
+  max: 100,
 });
-
 
 const { celebrate, Joi, errors } = require('celebrate');
 
@@ -26,9 +24,8 @@ const cookieParser = require('cookie-parser');
 
 const mongoose = require('mongoose');
 
-const { requestLogger, errorLogger } = require('./middlewares/logger');
-
 const helmet = require('helmet');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 
@@ -42,11 +39,11 @@ const { AppError, appErrors } = require('./utils/app-error');
 
 const app = express();
 
-app.use(limiter); 
+app.use(limiter);
 
 app.use(cors(corsOptions));
 
-app.use(helmet()); 
+app.use(helmet());
 
 app.use(cookieParser());
 
@@ -70,7 +67,6 @@ app.post('/signup', celebrate({
     password: Joi.string().required().min(8),
   }),
 }), createUser);
-
 
 app.get('/signuot', logout);
 

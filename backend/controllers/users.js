@@ -159,7 +159,7 @@ module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id },   NODE_ENV === 'production' ? JWT_SECRET : DEV_JWT_SECRET, { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : DEV_JWT_SECRET, { expiresIn: '7d' });
       res
         .cookie('jwt', token, {
           maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -185,12 +185,12 @@ module.exports.logout = (req, res) => {
 
 module.exports.verifyAccess = (req, res) => {
   const { origin } = req.headers;
-  const allowedCors =  ['http://localhost:5000', 
-  'http://mesta.students.nomoredomains.club',
-  'https://mesta.students.nomoredomains.club',
-  'http://localhost:3000']
+  const allowedCors = ['http://localhost:5000',
+    'http://mesta.students.nomoredomains.club',
+    'https://mesta.students.nomoredomains.club',
+    'http://localhost:3000'];
   if (allowedCors.includes(origin)) {
-      res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Origin', origin);
   }
   res.send({ data: req.user });
-}
+};

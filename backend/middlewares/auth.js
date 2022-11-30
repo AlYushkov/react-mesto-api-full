@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
   const token = req.cookies.jwt;
   let payload;
   try {
-    payload = jwt.verify(token,  NODE_ENV === 'production' ? JWT_SECRET : DEV_JWT_SECRET);
+    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : DEV_JWT_SECRET);
   } catch (e) {
     const err = new AppError(appErrors.notAuthorized);
     next(err);
