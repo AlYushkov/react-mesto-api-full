@@ -2,20 +2,9 @@ const { Router } = require('express');
 
 const { celebrate, Joi } = require('celebrate');
 
-const cors = require('cors');
-
 const auth = require('../middlewares/auth');
 
 const access = require('../middlewares/access');
-
-const corsOptions = {
-  origin: ['http://localhost:5000',
-    'http://mesta.students.nomoredomains.club',
-    'https://mesta.students.nomoredomains.club/',
-    'http://localhost:3000'],
-  optionsSuccessStatus: 200,
-  credentials: true,
-};
 
 const userRouter = Router();
 
@@ -23,7 +12,7 @@ const {
   getUser, getUsers, updateUser, updateAvatar, getMe, verifyAccess,
 } = require('../controllers/users');
 
-userRouter.get('/access', cors(corsOptions), access, verifyAccess);
+userRouter.get('/access', access, verifyAccess);
 
 userRouter.get('/me', auth, getMe);
 

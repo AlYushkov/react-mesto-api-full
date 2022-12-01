@@ -90,7 +90,7 @@ const App = () => {
         setInfoTooltipOpen(true, `${err.message}`, '0');
       })
   };
-/* to add new place */
+  /* to add new place */
   const handleAddPlace = (placeData) => {
     setBtnText('Сохранение...');
     const cardPromise = api.saveCardAsync(placeData.placeName, placeData.placeLink);
@@ -149,7 +149,7 @@ const App = () => {
         setInfoTooltipOpen(true, `${err.message}`, '0');
       });
   }
-/* to delete the card if it was confirmed in popup */
+  /* to delete the card if it was confirmed in popup */
   function DeleteCard(cardId) {
     setBtnText('Удаление...');
     api.deleteCardAsync(cardId)
@@ -169,7 +169,7 @@ const App = () => {
         setInfoTooltipOpen(true, `${err.message}`, '0');
       })
   };
-/* to activate confirm popup */
+  /* to activate confirm popup */
   function handleCardDelete(cardId) {
     setCardId(cardId);
     setIsConfirmPopupOpen(true);
@@ -238,14 +238,14 @@ const App = () => {
     signoutPromise
       .then((res) => {
         if (res.ok) {
-          setLoggedIn(false);               
+          setLoggedIn(false);
         }
         return res.json();
       })
       .then((data) => {
         setInfoTooltipOpen(true, data.message, '1');
         switchMode(true);
-        history.push('/sign-in');  
+        history.push('/sign-in');
       })
       .catch((err) => {
         setInfoTooltipOpen(true, 'Ошибка на сервере', '0');
@@ -296,7 +296,7 @@ const App = () => {
       history.push('/main');
     }
   }, [history, loggedIn]);
- 
+
   /* set props for Header component */
   const switchMode = (mode) => {
     // true: login, false: register

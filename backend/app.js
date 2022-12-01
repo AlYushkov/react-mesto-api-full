@@ -5,10 +5,11 @@ const cors = require('cors');
 const corsOptions = {
   origin: ['http://localhost:5000',
     'http://mesta.students.nomoredomains.club',
-    'https://mesta.students.nomoredomains.club/',
+    'https://mesta.students.nomoredomains.club',
     'http://localhost:3000'],
   optionsSuccessStatus: 200,
   credentials: true,
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
 };
 
 const rateLimit = require('express-rate-limit');
@@ -39,9 +40,9 @@ const { AppError, appErrors } = require('./utils/app-error');
 
 const app = express();
 
-app.use(limiter);
-
 app.use(cors(corsOptions));
+
+app.use(limiter);
 
 app.use(helmet());
 
