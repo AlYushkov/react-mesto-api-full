@@ -184,7 +184,5 @@ module.exports.logout = (req, res) => {
 };
 
 module.exports.verifyAccess = (req, res) => {
-  const { origin } = req.headers;
-  res.header('Access-Control-Allow-Origin', origin);
   res.send({ data: req.user });
 };
