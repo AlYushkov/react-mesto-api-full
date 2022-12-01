@@ -9,7 +9,7 @@ const corsOptions = {
     'http://localhost:3000'],
   optionsSuccessStatus: 200,
   credentials: true,
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
 };
 
 const rateLimit = require('express-rate-limit');
