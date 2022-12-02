@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 
 const corsOptions = {
-  origin: ['http://localhost:5000',
+  origin: ['http://localhost:3000',
     'http://mesta.students.nomoredomains.club',
     'https://mesta.students.nomoredomains.club',
     'http://localhost:3000'],
@@ -28,7 +28,7 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 
 const userRouter = require('./routes/users');
 
