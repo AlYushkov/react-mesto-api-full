@@ -5,7 +5,8 @@ const cors = require('cors');
 const corsOptions = {
   origin: ['http://localhost:3000',
     'http://mesta.students.nomoredomains.club',
-    'https://mesta.students.nomoredomains.club'],
+    'https://mesta.students.nomoredomains.club',
+  ],
   optionsSuccessStatus: 200,
   credentials: true,
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
@@ -39,11 +40,11 @@ const { AppError, appErrors } = require('./utils/app-error');
 
 const app = express();
 
+app.use(helmet());
+
 app.use(cors(corsOptions));
 
 app.use(limiter);
-
-app.use(helmet());
 
 app.use(cookieParser());
 
