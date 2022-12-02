@@ -52,6 +52,8 @@ app.use(express.json());
 
 app.use(requestLogger);
 
+app.options('*', cors(corsOptions));
+
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
