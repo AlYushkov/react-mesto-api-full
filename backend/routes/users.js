@@ -4,15 +4,13 @@ const { celebrate, Joi } = require('celebrate');
 
 const auth = require('../middlewares/auth');
 
-const access = require('../middlewares/access');
-
 const userRouter = Router();
 
 const {
   getUser, getUsers, updateUser, updateAvatar, getMe, verifyAccess,
 } = require('../controllers/users');
 
-userRouter.get('/access', access, verifyAccess);
+userRouter.get('/access', auth, verifyAccess);
 
 userRouter.get('/me', auth, getMe);
 

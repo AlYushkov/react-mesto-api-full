@@ -253,7 +253,7 @@ const App = () => {
   }
 
   /* verify if there is a token */
-  useEffect(() => {
+  useEffect(() => {    
     const accessPromise = auth.verifyAccess();
     accessPromise
       .then((res) => {

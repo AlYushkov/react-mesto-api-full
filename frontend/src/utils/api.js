@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = process.env.REACT_APP_MODE === 'develop' ? 'http://localhost:3001' : process.env.REACT_APP_API_URL;
 class Api {
     #baseUrl;
     #headers;
