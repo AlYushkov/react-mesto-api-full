@@ -1,4 +1,4 @@
-const BASE_URL = process.env.REACT_APP_MODE === 'develop' ? 'http://localhost:3001' : process.env.REACT_APP_API_URL;
+const BASE_URL = process.env.REACT_APP_MODE === 'develop' ? 'http://localhost:3001' : 'api.mesta.students.nomoredomains.club';
 
 export const register = async (password, email) => {
     const res = await fetch(`${BASE_URL}/signup`, {
