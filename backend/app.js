@@ -1,34 +1,21 @@
 const express = require('express');
 
-const cors = require('cors'); //enable CORS with various options
+const bodyParser = require('body-parser'); // Parse incoming request bodies
 
-const corsOptions = {
-  origin: ['http://localhost:3000',
-    'https://praktikum.tk',
-    'http://praktikum.tk',
-    /(https|http)?:\/\/(?:www\.|(?!www))mesta.students.nomoredomains.club\/[a-z]+\/|[a-z]+\/|[a-z]+(\/|)/
-  ],
-  optionsSuccessStatus: 200,
-  credentials: true,
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-};
-
-const bodyParser = require('body-parser') //Parse incoming request bodies
-
-const rateLimit = require('express-rate-limit'); //Use to limit repeated requests to public APIs
+const rateLimit = require('express-rate-limit'); // Use to limit repeated requests to public APIs
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
 });
 
-const { celebrate, Joi, errors } = require('celebrate'); //function that wraps the joi validation library
+const { celebrate, Joi, errors } = require('celebrate'); // function that wraps the joi validation library
 
-const cookieParser = require('cookie-parser'); //Parse Cookie header and populate req.cookies
+const cookieParser = require('cookie-parser'); // Parse Cookie header and populate req.cookies
 
 const mongoose = require('mongoose');
 
-const helmet = require('helmet'); //secure Express apps by setting various HTTP headers
+const helmet = require('helmet'); // secure Express apps by setting various HTTP headers
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -42,21 +29,48 @@ const { createUser, login, logout } = require('./controllers/users');
 
 const { AppError, appErrors } = require('./utils/app-error');
 
+const ALLOWED_CORS = ['http://localhost:3000',
+  'https://praktikum.tk',
+  'http://praktikum.tk',
+  'http://mesta.students.nomoredomains.club',
+  'https://mesta.students.nomoredomains.club',
+  'http://mesta.students.nomoredomains.club',
+  'https://mesta.students.nomoredomains.club',
+  'http://www.mesta.students.nomoredomains.club',
+  'https://www.mesta.students.nomoredomains.club',
+];
+const ALLOWED_METHODS = ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'];
+
 const app = express();
 
 app.use(helmet());
 
-app.use(cors(corsOptions));
-
 app.use(limiter);
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.use(cookieParser());
 
 app.use(express.json());
 
 app.use(requestLogger);
+
+app.use((req, res, next) => {
+  const { origin } = req.headers;
+
+  if (ALLOWED_CORS.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', true);
+  }
+  const reqHeaders = req.headers['access-control-request-headers'];
+  const { method } = req;
+  if (method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', ALLOWED_METHODS);
+    res.header('Access-Control-Allow-Headers', reqHeaders);
+    return res.end();
+  }
+  return next();
+});
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
