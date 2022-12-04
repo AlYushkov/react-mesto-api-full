@@ -4,12 +4,13 @@ const cors = require('cors'); //enable CORS with various options
 
 const corsOptions = {
   origin: ['http://localhost:3000',
-    'http://mesta.students.nomoredomains.club',
-    'https://mesta.students.nomoredomains.club',
+    'https://praktikum.tk',
+    'http://praktikum.tk',
+    /(https|http)?:\/\/(?:www\.|(?!www))mesta.students.nomoredomains.club\/[a-z]+\/|[a-z]+\/|[a-z]+(\/|)/
   ],
   optionsSuccessStatus: 200,
   credentials: true,
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
 };
 
 const bodyParser = require('body-parser') //Parse incoming request bodies
@@ -80,6 +81,12 @@ app.use('/users', userRouter);
 
 app.use('/cards', cardRouter);
 
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.use(errorLogger);
 
 app.use((req, res, next) => {
@@ -91,7 +98,7 @@ app.use(errors());
 
 app.use((error, req, res, next) => {
   const errMessage = error.statusCode ? error.message : 'Ошибка на серверe';
-  res.status(error.statusCode || 500).json({ message: errMessage });
+  res.status(error.statusCode || 500).send({ errMessage });
   next();
 });
 
