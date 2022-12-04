@@ -4,11 +4,9 @@ const bcrypt = require('bcrypt');
 
 const User = require('../models/user');
 
-const { DEV_JWT_SECRET } = require('../utils/dev-key');
-
 require('dotenv').config();
 
-const { NODE_ENV, JWT_SECRET } = process.env;
+const { NODE_ENV, JWT_SECRET, DEV_JWT_SECRET } = process.env;
 
 const { AppError, appErrors } = require('../utils/app-error');
 

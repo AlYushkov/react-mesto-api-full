@@ -1,4 +1,4 @@
-const BASE_URL = process.env.REACT_APP_MODE === 'develop' ? 'http://localhost:3001' : 'api.mesta.students.nomoredomains.club';
+const BASE_URL = process.env.REACT_APP_MODE === 'develop' ? 'http://localhost:3001' : 'https://mesta.students.nomoredomains.club';
 class Api {
     #baseUrl;
     #headers;

@@ -1,6 +1,6 @@
 const express = require('express');
 
-const cors = require('cors');
+const cors = require('cors'); //enable CORS with various options
 
 const corsOptions = {
   origin: ['http://localhost:3000',
@@ -12,20 +12,23 @@ const corsOptions = {
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
 };
 
-const rateLimit = require('express-rate-limit');
+const bodyParser = require('body-parser') //Parse incoming request bodies
+
+const rateLimit = require('express-rate-limit'); //Use to limit repeated requests to public APIs
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
 });
 
-const { celebrate, Joi, errors } = require('celebrate');
+const { celebrate, Joi, errors } = require('celebrate'); //function that wraps the joi validation library
 
-const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser'); //Parse Cookie header and populate req.cookies
 
 const mongoose = require('mongoose');
 
-const helmet = require('helmet');
+const helmet = require('helmet'); //secure Express apps by setting various HTTP headers
+
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3001 } = process.env;
@@ -46,13 +49,13 @@ app.use(cors(corsOptions));
 
 app.use(limiter);
 
+app.use(bodyParser.json())
+
 app.use(cookieParser());
 
 app.use(express.json());
 
 app.use(requestLogger);
-
-app.options('*', cors(corsOptions));
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
