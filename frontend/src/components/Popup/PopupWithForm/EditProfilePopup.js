@@ -40,8 +40,8 @@ function EditProfilePopup({ btnText, isOpen, onClose, onUpdateUser }) {
                     type="text"
                     className="fieldset__input fieldset__input_field_first"
                     placeholder="Имя, фамилия"
-                    minLength="2"
-                    maxLength="40"
+                    minlength="2"
+                    maxlength="40"
                     value={name}
                     onChange={handleChangeName}
                 />
@@ -54,8 +54,8 @@ function EditProfilePopup({ btnText, isOpen, onClose, onUpdateUser }) {
                     type="text"
                     className="fieldset__input fieldset__input_field_second"
                     placeholder="О себе"
-                    minLength="2"
-                    maxLength="200"
+                    minlength="2"
+                    maxlength="200"
                     value={description}
                     onChange={handleChangeDescription}
                 />

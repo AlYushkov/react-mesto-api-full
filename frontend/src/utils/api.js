@@ -1,4 +1,4 @@
-const BASE_URL = process.env.REACT_APP_MODE === 'develop' ? 'http://localhost:3001' : 'https://mesta.students.nomoredomains.club';
+const REACT_APP_BASE_URL = process.env.REACT_APP_MODE === 'develop' ? 'http://localhost:3001' : 'https://mesta.students.nomoredomains.club';
 class Api {
     #baseUrl;
     #headers;
@@ -78,7 +78,7 @@ class Api {
 
 const api = new Api(
     {
-        baseUrl: BASE_URL,
+        baseUrl: REACT_APP_BASE_URL,
         headers: {
             'Content-Type': 'application/json'
         }

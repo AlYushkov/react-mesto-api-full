@@ -112,7 +112,7 @@ app.use(errors());
 
 app.use((error, req, res, next) => {
   const errMessage = error.statusCode ? error.message : 'Ошибка на серверe';
-  res.status(error.statusCode || 500).send({ errMessage });
+  res.status(error.statusCode || 500).send({ message: errMessage });
   next();
 });
 

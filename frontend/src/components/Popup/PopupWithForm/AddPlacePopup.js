@@ -33,8 +33,8 @@ function AddPlacePopup({ btnText, isOpen, onClose, onSaveCard }) {
                     type="text"
                     className="fieldset__input fieldset__input_field_first"
                     placeholder="Название"
-                    minLength="2"
-                    maxLength="30"
+                    minlength="2"
+                    maxlength="30"
                     value={name}
                     onChange={handleChangeName}
                 />
