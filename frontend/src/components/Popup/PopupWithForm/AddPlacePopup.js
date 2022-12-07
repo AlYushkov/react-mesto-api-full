@@ -5,6 +5,8 @@ import formValidator from '../../../utils/formValidator';
 function AddPlacePopup({ btnText, isOpen, onClose, onSaveCard }) {
     const [name, setName] = React.useState('');
     const [link, setLink] = React.useState('');
+    const maxLength = "30";
+    const minLength = "2";
     const handleChangeName = (e) => {
         setName(e.target.value);
     };
@@ -33,8 +35,8 @@ function AddPlacePopup({ btnText, isOpen, onClose, onSaveCard }) {
                     type="text"
                     className="fieldset__input fieldset__input_field_first"
                     placeholder="Название"
-                    minlength="2"
-                    maxlength="30"
+                    minlength={minLength}
+                    maxlength={maxLength}
                     value={name}
                     onChange={handleChangeName}
                 />

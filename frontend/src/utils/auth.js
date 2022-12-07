@@ -1,7 +1,7 @@
-const REACT_APP_BASE_URL = process.env.REACT_APP_MODE === 'develop'  ? 'http://localhost:3001' : 'https://mesta.students.nomoredomains.club';
+const BASE_URL =  'http://localhost:3001' // 'https://mesta.students.nomoredomains.club';
 
 export const register = async (password, email) => {
-    const res = await fetch(`${REACT_APP_BASE_URL}/signup`, {
+    const res = await fetch(`${BASE_URL}/signup`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -13,7 +13,7 @@ export const register = async (password, email) => {
 };
 
 export const authorize = async (password, email) => {
-    const res = await fetch(`${REACT_APP_BASE_URL}/signin`, {
+    const res = await fetch(`${BASE_URL}/signin`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -26,7 +26,7 @@ export const authorize = async (password, email) => {
 };
 
 export const logout = async () => {
-    const res = await fetch(`${REACT_APP_BASE_URL}/signuot`, {
+    const res = await fetch(`${BASE_URL}/signuot`, {
         method: 'GET', 
         credentials: 'include',
         headers: {
@@ -38,7 +38,7 @@ export const logout = async () => {
 }
 
 export const getMe = async () => {
-    const res = await fetch(`${REACT_APP_BASE_URL}/users/me`, {
+    const res = await fetch(`${BASE_URL}/users/me`, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -50,7 +50,7 @@ export const getMe = async () => {
 };
 
 export const verifyAccess = async () => {
-    const res = await fetch(`${REACT_APP_BASE_URL}/users/access`, {
+    const res = await fetch(`${BASE_URL}/users/access`, {
         method: 'GET',
         credentials: 'include',
         headers: {

@@ -7,6 +7,9 @@ function EditProfilePopup({ btnText, isOpen, onClose, onUpdateUser }) {
     const currentUser = React.useContext(CurrentUserContext);
     const [name, setName] = React.useState(currentUser.name);
     const [description, setDescription] = React.useState(currentUser.about);
+    const maxLengthName = "30";
+    const maxLengthDescr = "200";
+    const minLength = "2";
     useEffect(() => {
         formValidator.enableValidation(document.forms.namedItem("editProfile"));
     }, []);
@@ -40,8 +43,8 @@ function EditProfilePopup({ btnText, isOpen, onClose, onUpdateUser }) {
                     type="text"
                     className="fieldset__input fieldset__input_field_first"
                     placeholder="Имя, фамилия"
-                    minlength="2"
-                    maxlength="40"
+                    minlength={minLength}
+                    maxlength={maxLengthName}
                     value={name}
                     onChange={handleChangeName}
                 />
@@ -54,8 +57,8 @@ function EditProfilePopup({ btnText, isOpen, onClose, onUpdateUser }) {
                     type="text"
                     className="fieldset__input fieldset__input_field_second"
                     placeholder="О себе"
-                    minlength="2"
-                    maxlength="200"
+                    minlength={minLength}
+                    maxlength={maxLengthDescr}
                     value={description}
                     onChange={handleChangeDescription}
                 />
