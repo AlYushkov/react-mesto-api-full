@@ -1,4 +1,3 @@
-const BASE_URL = 'http://localhost:3001'  // 'https://mesta.students.nomoredomains.club';
 class Api {
     #baseUrl;
     #headers;
@@ -7,17 +6,17 @@ class Api {
         this.#headers = headers;
     };
 
-    async getDataAsync(endPoint) {
-        const res = await fetch(`${this.#baseUrl}/${endPoint}`, {
+    async getDataAsync() {
+        const promise = await fetch(`${this.#baseUrl}/cards`, {
             method: 'GET',    
             credentials: 'include',        
             headers: this.#headers
         });
-        return res;
+        return promise;
     }
 
     async saveCardAsync(placeName, placeLink) {
-        const res = await fetch(`${this.#baseUrl}/cards`, {
+        const promise = await fetch(`${this.#baseUrl}/cards`, {
             method: 'POST',
             credentials: 'include', 
             headers: this.#headers,
@@ -26,33 +25,33 @@ class Api {
                 link: placeLink
             })
         });
-        return res;
+        return promise;
     };
 
     async changeLikeCardStatusAsync(id, like) {
         const url = `${this.#baseUrl}/cards`;
         const _method = like ? 'PUT' : 'DELETE';
-        const res = await fetch(`${url}/${id}/likes`, {
+        const promise = await fetch(`${url}/${id}/likes`, {
             method: _method,
             credentials: 'include', 
             headers: this.#headers
         });
-        return res;
+        return promise;
     };
 
     async deleteCardAsync(id) {
         const url = `${this.#baseUrl}/cards`;
-        const res = await fetch(`${url}/${id}`, {
+        const promise = await fetch(`${url}/${id}`, {
             method: 'DELETE',
             credentials: 'include', 
             headers: this.#headers
         });
-        return res;
+        return promise;
     };
 
     async setUserInfoAsync(userName, description) {
         const url = `${this.#baseUrl}/users/me`;
-        const res = await fetch(`${url}`, {
+        const promise = await fetch(`${url}`, {
             method: 'PATCH',
             credentials: 'include', 
             headers: this.#headers,
@@ -61,10 +60,10 @@ class Api {
                 about: description
             })
         });
-        return res;
+        return promise;
     };
     async setAvatarAsync(link) {
-        const res = await fetch(`${this.#baseUrl}/users/me/avatar`, {
+        const promise = await fetch(`${this.#baseUrl}/users/me/avatar`, {
             method: 'PATCH',
             credentials: 'include', 
             headers: this.#headers,
@@ -72,13 +71,13 @@ class Api {
                 avatar: link
             })
         });
-        return res;
+        return promise;
     }
 }
 
 const api = new Api(
     {
-        baseUrl: BASE_URL,
+        baseUrl: process.env.REACT_APP_API_URL,
         headers: {
             'Content-Type': 'application/json'
         }

@@ -1,7 +1,7 @@
-const BASE_URL =  'http://localhost:3001' // 'https://mesta.students.nomoredomains.club';
+const REACT_APP_BASE_URL = process.env.REACT_APP_API_URL;
 
 export const register = async (password, email) => {
-    const res = await fetch(`${BASE_URL}/signup`, {
+    const promise = await fetch(`${REACT_APP_BASE_URL}/signup`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -9,11 +9,11 @@ export const register = async (password, email) => {
         },
         body: JSON.stringify({ password, email })
     });
-    return res;
+    return promise;
 };
 
 export const authorize = async (password, email) => {
-    const res = await fetch(`${BASE_URL}/signin`, {
+    const promise = await fetch(`${REACT_APP_BASE_URL}/signin`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -22,11 +22,11 @@ export const authorize = async (password, email) => {
         },
         body: JSON.stringify({ password, email })
     });
-    return res;
+    return promise;
 };
 
 export const logout = async () => {
-    const res = await fetch(`${BASE_URL}/signuot`, {
+    const promise = await fetch(`${REACT_APP_BASE_URL}/signuot`, {
         method: 'GET', 
         credentials: 'include',
         headers: {
@@ -34,11 +34,11 @@ export const logout = async () => {
             'Content-Type': 'application/json'
         }
     });
-    return res;
+    return promise;
 }
 
 export const getMe = async () => {
-    const res = await fetch(`${BASE_URL}/users/me`, {
+    const promise = await fetch(`${REACT_APP_BASE_URL}/users/me`, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -46,11 +46,11 @@ export const getMe = async () => {
             'Content-Type': 'application/json',
         }
     });
-    return res;
+    return promise;
 };
 
 export const verifyAccess = async () => {
-    const res = await fetch(`${BASE_URL}/users/access`, {
+    const promise = await fetch(`${REACT_APP_BASE_URL}/users/access`, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -58,5 +58,5 @@ export const verifyAccess = async () => {
             'Content-Type': 'application/json',
         }
     });
-    return res;
+    return promise;
 } 

@@ -9,12 +9,15 @@ const userRouter = Router();
 const {
   getUser, getUsers, updateUser, updateAvatar, getMe, verifyAccess,
 } = require('../controllers/users');
+const acceess = require('../middlewares/acceess');
 
-userRouter.get('/access', auth, verifyAccess);
+userRouter.get('/access', acceess, verifyAccess);
 
 userRouter.get('/me', auth, getMe);
 
 userRouter.get('/', auth, getUsers);
+
+userRouter.delete('/', auth, getUsers);
 
 userRouter.get('/:id', auth, celebrate({
   params: Joi.object().keys({

@@ -45,21 +45,21 @@ const App = () => {
     setBtnText('');
   }
 
-    /* to activate confirm popup */
-    function handleCardDelete(cardId) {
-      setCardId(cardId);
-      setIsConfirmPopupOpen(true);
-    };
-  
-    const closeAllPopups = () => {
-      setIsEditAvatarPopupOpen(false);
-      setIsEditProfilePopupOpen(false);
-      setIsAddPlacePopupOpen(false);
-      setIsConfirmPopupOpen(false);
-      setSelectedCard(null);
-      setCardId(null);
-      setBtnText('');
-    };
+  /* to activate confirm popup */
+  function handleCardDelete(cardId) {
+    setCardId(cardId);
+    setIsConfirmPopupOpen(true);
+  };
+
+  const closeAllPopups = () => {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsConfirmPopupOpen(false);
+    setSelectedCard(null);
+    setCardId(null);
+    setBtnText('');
+  };
 
   /* main content proccessing */
   const handleEditAvatarClick = () => {
@@ -82,23 +82,24 @@ const App = () => {
     setBtnText('Сохранение...');
     const userInfoPromise = api.setUserInfoAsync(userInfo.name, userInfo.about);
     userInfoPromise
-      .then((res) => {
-        if (res.ok) {
-          res.json()
-          .then((data) => {
-            setCurrentUser(data.data);
-            closeAllPopups();
-            return;
-          })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
         } else {
-          res.json()
-          .then((data) => {
-            return Promise.reject(new Error(data.message));
-          })
-          .catch((err) => {
-            setInfoTooltipOpen(true, `${err.message}`, '0');
-          })
+          return Promise.reject(new Error('Сервер не отвечает'));
         }
+      })
+      .then((data) => {
+        if (data.data) {
+          setCurrentUser(data.data);
+          closeAllPopups();
+          return;
+        } else if (data.message) {
+          return Promise.reject(new Error(data.message));
+        }
+      })
+      .catch((err) => {
+        setInfoTooltipOpen(true, `${err.message}`, '0');
       })
   };
 
@@ -106,74 +107,81 @@ const App = () => {
     setBtnText('Сохранение...');
     const avatarPromise = api.setAvatarAsync(link);
     avatarPromise
-      .then((res) => {
-        if (res.ok) {
-          res.json()
-          .then((data) => {
-            setCurrentUser(data.data);
-            closeAllPopups();
-            return;
-          })
+      .then((response) => {
+        if (response.ok) {
+          response.json()
         } else {
-          res.json()
-          .then((data) => {
-            return Promise.reject(new Error(data.message));
-          })
-          .catch((err) => {
-            setInfoTooltipOpen(true, `${err.message}`, '0');
-          })
+          return Promise.reject(new Error('Сервер не отвечает'));
         }
       })
-  };
+      .then((data) => {
+        if (data.data) {
+          setCurrentUser(data.data);
+          closeAllPopups();
+          return;
+        } else if (data.message) {
+          return Promise.reject(new Error(data.message));
+        }
+      })
+      .catch((err) => {
+        setInfoTooltipOpen(true, `${err.message}`, '0');
+      });
+  }
 
   /* to add new place */
   const handleAddPlace = (placeData) => {
     setBtnText('Сохранение...');
     const cardPromise = api.saveCardAsync(placeData.placeName, placeData.placeLink);
     cardPromise
-      .then((res) => {
-        if (res.ok) {
-          res.json()
-          .then((data) => {
-            setCards([data.data, ...cards]);
-            setCardsHandleQty(cardsHandleQty + 1);
-            closeAllPopups();
-            return;
-          })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
         } else {
-          res.json()
-          .then((data) => {
-            return Promise.reject(new Error(data.message));
-          })
-          .catch((err) => {
-            setInfoTooltipOpen(true, `${err.message}`, '0');
-          })
+          return Promise.reject(new Error('Сервер не отвечает'));
         }
+      })
+      .then((data) => {
+        if (data.data) {
+          setCards([data.data, ...cards]);
+          setCardsHandleQty(cardsHandleQty + 1);
+          closeAllPopups();
+          return;
+        } else if (data.message) {
+          return Promise.reject(new Error(data.message));
+        }
+      })
+      .catch((err) => {
+        setInfoTooltipOpen(true, `${err.message}`, '0');
       })
   }
 
   /*  rerieve cards for the current user */
+
   React.useEffect(() => {
-    if (!loggedIn) return;
-    const cardsPromise = api.getDataAsync('cards');
+    if (!loggedIn) {
+      setCards([]);
+      return;
+    }
+    const cardsPromise = api.getDataAsync();
     cardsPromise
-      .then((res) => {
-        if (res.ok) {
-          res.json()
-          .then((data) => {
-            setCards(data.data);
-            return;
-          })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
         } else {
-          res.json()
-          .then((data) => {
-            return Promise.reject(new Error(data.message));
-          })
-          .catch((err) => {
-            setInfoTooltipOpen(true, `${err.message}`, '0');
-          });
+          return Promise.reject(new Error('Сервер не отвечает'));
         }
       })
+      .then((data) => {
+        if (data.data) {
+          setCards(data.data);
+          return;
+        } else if (data.message) {
+          return Promise.reject(new Error(data.message));
+        }
+      })
+      .catch((err) => {
+        setInfoTooltipOpen(true, `${err.message}`, '0');
+      });
   }, [loggedIn, cardsHandleQty]);
 
   /* to add or delete like for a card */
@@ -181,49 +189,52 @@ const App = () => {
     const isLiked = card.likes.some(i => i === currentUser._id);
     const cardPromise = api.changeLikeCardStatusAsync(card._id, !isLiked);
     cardPromise
-      .then((res) => {
-        if(res.ok) {
-          res.json()
-          .then((data) => {
-            setCards((state) => state.map((c) => c === data.data._id ? data.data._id : c));
-            setCardsHandleQty(cardsHandleQty + 1);
-            return;
-          })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
         } else {
-          res.json()
-          .then((data) => {
-            return Promise.reject(new Error(data.message));
-          })
-          .catch((err) => {
-            setInfoTooltipOpen(true, `${err.message}`, '0');
-          });
+          return Promise.reject(new Error('Сервер не отвечает'));
         }
       })
+      .then((data) => {
+        if (data.data) {
+          setCards((state) => state.map((c) => c === data.data._id ? data.data._id : c));
+          setCardsHandleQty(cardsHandleQty + 1);
+          return;
+        } else if (data.message) {
+          return Promise.reject(new Error(data.message));
+        }
+      })
+      .catch((err) => {
+        setInfoTooltipOpen(true, `${err.message}`, '0');
+      });
   }
 
   /* to delete the card if it was confirmed in popup */
   function DeleteCard(cardId) {
     setBtnText('Удаление...');
-    api.deleteCardAsync(cardId)
-      .then((res) => {
-        if (res.ok) {
-          res.json()
-          .then((data) => {
-            setCards(cards.filter(card => card._id !== cardId));
-            setCardsHandleQty(cardsHandleQty + 1);
-            closeAllPopups();
-            return;
-          })
+    const deleteCardPromise = api.deleteCardAsync(cardId)
+    deleteCardPromise
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
         } else {
-          res.json()
-          .then((data) => {
-            setIsConfirmPopupOpen(false);
-            return Promise.reject(new Error(data.message));            
-          })
-          .catch((err) => {
-            setInfoTooltipOpen(true, `${err.message}`, '0');
-          })
+          return Promise.reject(new Error('Сервер не отвечает'));
         }
+      })
+      .then((data) => {
+        if (data.data) {
+          setCards(cards.filter(card => card._id !== cardId));
+          setCardsHandleQty(cardsHandleQty + 1);
+          closeAllPopups();
+          return;
+        } else if (data.message) {
+          setIsConfirmPopupOpen(false);
+          return Promise.reject(new Error(data.message));
+        }
+      })
+      .catch((err) => {
+        setInfoTooltipOpen(true, `${err.message}`, '0');
       })
   };
 
@@ -232,14 +243,23 @@ const App = () => {
     setBtnText('Подождите...');
     const autorizePromise = auth.authorize(password, email);
     return autorizePromise
-      .then((res) => {
-        return res.json();
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return Promise.reject(new Error('Сервер не отвечает'));
+        }
       })
       .then((data) => {
-        if (data.message) {
+        if (data.data) {
+          setLoggedIn(true);
+          return;
+        } else if (data.message) {
           return Promise.reject(new Error(data.message));
         }
-        setLoggedIn(true);
+      })
+      .catch((err) => {
+        setInfoTooltipOpen(true, `${err.message}`, '0');
       })
       .finally(() => {
         setBtnText('');
@@ -250,40 +270,51 @@ const App = () => {
     setBtnText('Подождите...');
     const registerPromise = auth.register(password, email);
     return registerPromise
-      .then((res) => {
-        return res.json();
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return Promise.reject(new Error('Сервер не отвечает'));
+        }
       })
       .then((data) => {
-        if (data.message) {
-          return Promise.reject(new Error(data.message));
-        } else {
+        if (data.data) {
           setInfoTooltipOpen(true, 'Вы успешно зарегистрировались!', '1');
           history.push('/sign-in');
+          return;
+        } else if (data.message) {
+          return Promise.reject(new Error(data.message));
         }
+      })
+      .catch((err) => {
+        setInfoTooltipOpen(true, `${err.message}`, '0');
       })
       .finally(() => {
         setBtnText('');
       });
   };
 
-
   const signOut = () => {
-
     const signoutPromise = auth.logout();
     signoutPromise
-      .then((res) => {
-        if (res.ok) {
-          setLoggedIn(false);
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return Promise.reject(new Error('Сервер не отвечает'));
         }
-        return res.json();
       })
       .then((data) => {
-        setInfoTooltipOpen(true, data.message, '1');
-        switchMode(true);
-        history.push('/sign-in');
+        if (data.message) {
+          setInfoTooltipOpen(true, data.message, '1');
+          switchMode(true);
+          history.push('/sign-in');
+          setLoggedIn(false);
+          return;
+        }
       })
       .catch((err) => {
-        setInfoTooltipOpen(true, 'Ошибка на сервере', '0');
+        setInfoTooltipOpen(true, `${err.message}`, '0');
       })
   }
 
@@ -291,35 +322,49 @@ const App = () => {
   useEffect(() => {
     const accessPromise = auth.verifyAccess();
     accessPromise
-      .then((res) => {
-        if (res.ok) {
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return Promise.reject(new Error('Сервер не отвечает'));
+        }
+      })
+      .then((data) => {
+        if (data.data) {
           setLoggedIn(true);
+        } else {
+          setInfoTooltipOpen(true, 'Необходимо авторизоваться', '1');
           return;
-        };
-        return res.json()
-          .then((data) => {
-            return Promise.reject(new Error(data.message));
-          })
-          .catch((err) => {
-            setInfoTooltipOpen(true, `${err.message}`, '1');
-          })
+        }
+      })
+      .catch((err) => {
+        setInfoTooltipOpen(true, `${err.message}`, '1');
       })
   }, []);
 
   /* retrieve user data */
+
   useEffect(() => {
-    if (!loggedIn) return;
+    if (!loggedIn) {
+      setCurrentUser({});
+      return;
+    }
     const contentPromise = auth.getMe();
     contentPromise
-      .then((res) => {
-        return res.json();
-      })
-      .then((myData) => {
-        if (myData.message) {
-          return Promise.reject(new Error(myData.message));
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return Promise.reject(new Error('Сервер не отвечает'));
         }
-        setCurrentUser(myData.data);
-        setLoggedIn(true);
+      })
+      .then((data) => {
+        if (data.data) {
+          setCurrentUser(data.data);
+          return;
+        } else if (data.message) {
+          return Promise.reject(new Error(data.message));
+        }
       })
       .catch((err) => {
         setInfoTooltipOpen(true, `${err.message}`, '0');

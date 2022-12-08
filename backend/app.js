@@ -43,18 +43,6 @@ const ALLOWED_METHODS = ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'];
 
 const app = express();
 
-app.use(helmet());
-
-app.use(limiter);
-
-app.use(bodyParser.json());
-
-app.use(cookieParser());
-
-app.use(express.json());
-
-app.use(requestLogger);
-
 app.use((req, res, next) => {
   const { origin } = req.headers;
 
@@ -67,10 +55,22 @@ app.use((req, res, next) => {
   if (method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', ALLOWED_METHODS);
     res.header('Access-Control-Allow-Headers', reqHeaders);
-    return res.end();
+    return res.end(); // no more headers sending
   }
   return next();
 });
+
+app.use(helmet());
+
+app.use(limiter);
+
+app.use(bodyParser.json());
+
+app.use(cookieParser());
+
+app.use(express.json());
+
+app.use(requestLogger);
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
@@ -111,8 +111,10 @@ app.use((req, res, next) => {
 app.use(errors());
 
 app.use((error, req, res, next) => {
-  const errMessage = error.statusCode ? error.message : 'Ошибка на серверe';
-  res.status(error.statusCode || 500).send({ message: errMessage });
+  if (res.headersSent !== true) {
+    const errMessage = error.statusCode ? error.message : 'Ошибка на серверe';
+    res.status(error.statusCode || 500).send({ message: errMessage });
+  }
   next();
 });
 
