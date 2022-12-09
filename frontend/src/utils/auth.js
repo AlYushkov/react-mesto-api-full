@@ -3,6 +3,7 @@ const REACT_APP_BASE_URL = process.env.REACT_APP_API_URL;
 export const register = async (password, email) => {
     const promise = await fetch(`${REACT_APP_BASE_URL}/signup`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'

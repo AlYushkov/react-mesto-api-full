@@ -29,14 +29,8 @@ const { createUser, login, logout } = require('./controllers/users');
 
 const { AppError, appErrors } = require('./utils/app-error');
 
-const ALLOWED_CORS = ['http://localhost:3000',
-  'https://praktikum.tk',
-  'http://praktikum.tk',
-  'http://mesta.students.nomoredomains.club',
+const ALLOWED_CORS = ['http://localhost:3002',
   'https://mesta.students.nomoredomains.club',
-  'http://mesta.students.nomoredomains.club',
-  'https://mesta.students.nomoredomains.club',
-  'http://www.mesta.students.nomoredomains.club',
   'https://www.mesta.students.nomoredomains.club',
 ];
 const ALLOWED_METHODS = ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'];
@@ -45,7 +39,7 @@ const app = express();
 
 app.use((req, res, next) => {
   const { origin } = req.headers;
-
+  console.log(origin);
   if (ALLOWED_CORS.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Credentials', true);
@@ -55,7 +49,7 @@ app.use((req, res, next) => {
   if (method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', ALLOWED_METHODS);
     res.header('Access-Control-Allow-Headers', reqHeaders);
-    return res.end(); // no more headers sending
+    return res.send(); // no more headers sending
   }
   return next();
 });

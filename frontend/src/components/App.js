@@ -85,9 +85,7 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } else {
-          return Promise.reject(new Error('Сервер не отвечает'));
-        }
+        } return;
       })
       .then((data) => {
         if (data.data) {
@@ -110,9 +108,7 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           response.json()
-        } else {
-          return Promise.reject(new Error('Сервер не отвечает'));
-        }
+        } return;
       })
       .then((data) => {
         if (data.data) {
@@ -136,9 +132,7 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } else {
-          return Promise.reject(new Error('Сервер не отвечает'));
-        }
+        } return;
       })
       .then((data) => {
         if (data.data) {
@@ -167,9 +161,7 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } else {
-          return Promise.reject(new Error('Сервер не отвечает'));
-        }
+        } return;
       })
       .then((data) => {
         if (data.data) {
@@ -192,9 +184,7 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } else {
-          return Promise.reject(new Error('Сервер не отвечает'));
-        }
+        } return;
       })
       .then((data) => {
         if (data.data) {
@@ -218,9 +208,7 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } else {
-          return Promise.reject(new Error('Сервер не отвечает'));
-        }
+        } return;
       })
       .then((data) => {
         if (data.data) {
@@ -246,9 +234,7 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } else {
-          return Promise.reject(new Error('Сервер не отвечает'));
-        }
+        } return;
       })
       .then((data) => {
         if (data.data) {
@@ -273,9 +259,7 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } else {
-          return Promise.reject(new Error('Сервер не отвечает'));
-        }
+        } return;
       })
       .then((data) => {
         if (data.data) {
@@ -287,7 +271,7 @@ const App = () => {
         }
       })
       .catch((err) => {
-        setInfoTooltipOpen(true, `${err.message}`, '0');
+        setInfoTooltipOpen(true, 'Сервер не отвечает', '0');
       })
       .finally(() => {
         setBtnText('');
@@ -300,9 +284,7 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } else {
-          return Promise.reject(new Error('Сервер не отвечает'));
-        }
+        } return;
       })
       .then((data) => {
         if (data.message) {
@@ -325,9 +307,7 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } else {
-          return Promise.reject(new Error('Сервер не отвечает'));
-        }
+        } return;
       })
       .then((data) => {
         if (data.data) {
@@ -338,7 +318,7 @@ const App = () => {
         }
       })
       .catch((err) => {
-        setInfoTooltipOpen(true, `${err.message}`, '1');
+        setInfoTooltipOpen(true, 'Сервер не отвечает', '0');
       })
   }, []);
 
@@ -354,9 +334,7 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } else {
-          return Promise.reject(new Error('Сервер не отвечает'));
-        }
+        } return;
       })
       .then((data) => {
         if (data.data) {
