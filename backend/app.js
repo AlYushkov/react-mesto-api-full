@@ -32,6 +32,8 @@ const { AppError, appErrors } = require('./utils/app-error');
 const ALLOWED_CORS = ['http://localhost:3000',
   'https://mesta.students.nomoredomains.club',
   'https://www.mesta.students.nomoredomains.club',
+  'http://mesta.students.nomoredomains.club',
+  'http://www.mesta.students.nomoredomains.club',
 ];
 const ALLOWED_METHODS = ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'];
 

@@ -57,7 +57,7 @@ function Register({ btnText, onRegister, onInfoTooltipOpen, onSwitchMode, childr
                         type="password"
                         className="fieldset__input fieldset__input_mod_white fieldset__input_field_second"
                         placeholder="Пароль"
-                        minLength="6"
+                        minLength="8"
                         maxLength="200"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
