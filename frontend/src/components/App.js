@@ -61,6 +61,13 @@ const App = () => {
     setBtnText('');
   };
 
+/* to allow cyrillic text only in error messages*/
+const errorMessage = (message) => {
+  const regex = /^([а-яёА-ЯёЁ0-9] ?)+$/;
+  const msg = regex.test(message) ? message : 'Что-то пошло не так...';
+      setInfoTooltipOpen(true, msg,'0');
+}
+
   /* main content proccessing */
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
@@ -85,7 +92,9 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } return;
+        } else {
+          return Promise.reject(new Error('Что-то пошло не так...'));
+        }
       })
       .then((data) => {
         if (data.data) {
@@ -97,7 +106,7 @@ const App = () => {
         }
       })
       .catch((err) => {
-        setInfoTooltipOpen(true, `${err.message}`, '0');
+        errorMessage(err.message);        
       })
   };
 
@@ -107,8 +116,10 @@ const App = () => {
     avatarPromise
       .then((response) => {
         if (response.ok) {
-          response.json()
-        } return;
+          return response.json()
+        }  else {
+          return Promise.reject(new Error('Что-то пошло не так...'));
+        }
       })
       .then((data) => {
         if (data.data) {
@@ -120,7 +131,7 @@ const App = () => {
         }
       })
       .catch((err) => {
-        setInfoTooltipOpen(true, `${err.message}`, '0');
+        errorMessage(err.message);
       });
   }
 
@@ -132,7 +143,9 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } return;
+        } else {
+          return Promise.reject(new Error('Что-то пошло не так...'));
+        }
       })
       .then((data) => {
         if (data.data) {
@@ -145,7 +158,7 @@ const App = () => {
         }
       })
       .catch((err) => {
-        setInfoTooltipOpen(true, `${err.message}`, '0');
+        errorMessage(err.message);
       })
   }
 
@@ -161,7 +174,9 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } return;
+        }  else {
+          return Promise.reject(new Error('Что-то пошло не так..'));
+        }
       })
       .then((data) => {
         if (data.data) {
@@ -172,8 +187,9 @@ const App = () => {
         }
       })
       .catch((err) => {
-        setInfoTooltipOpen(true, `${err.message}`, '0');
+        errorMessage(err.message);
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedIn, cardsHandleQty]);
 
   /* to add or delete like for a card */
@@ -184,7 +200,9 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } return;
+        }  else {
+          return Promise.reject(new Error('Что-то пошло не так...'));
+        }
       })
       .then((data) => {
         if (data.data) {
@@ -196,7 +214,7 @@ const App = () => {
         }
       })
       .catch((err) => {
-        setInfoTooltipOpen(true, `${err.message}`, '0');
+        errorMessage(err.message);
       });
   }
 
@@ -208,7 +226,9 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } return;
+        } else {
+          return Promise.reject(new Error('Что-то пошло не так...'));
+        }
       })
       .then((data) => {
         if (data.data) {
@@ -222,7 +242,7 @@ const App = () => {
         }
       })
       .catch((err) => {
-        setInfoTooltipOpen(true, `${err.message}`, '0');
+        errorMessage(err.message);
       })
   };
 
@@ -230,11 +250,13 @@ const App = () => {
   const onLogin = (password, email) => {
     setBtnText('Подождите...');
     const autorizePromise = auth.authorize(password, email);
-    return autorizePromise
+    autorizePromise
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } return;
+        } else if(response.status === 401) {
+          return Promise.reject(new Error('Логин или пароль с ошибкой'));
+        }
       })
       .then((data) => {
         if (data.data) {
@@ -245,7 +267,7 @@ const App = () => {
         }
       })
       .catch((err) => {
-        setInfoTooltipOpen(true, `${err.message}`, '0');
+        errorMessage(err.message);
       })
       .finally(() => {
         setBtnText('');
@@ -254,12 +276,15 @@ const App = () => {
 
   const onRegister = (password, email) => {
     setBtnText('Подождите...');
+    
     const registerPromise = auth.register(password, email);
-    return registerPromise
+    registerPromise
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } return;
+        } else if (response.status === 409) {
+          return Promise.reject(new Error('Этот логин уже зарегитрирован'));
+        }
       })
       .then((data) => {
         if (data.data) {
@@ -271,7 +296,7 @@ const App = () => {
         }
       })
       .catch((err) => {
-        setInfoTooltipOpen(true, 'Сервер не отвечает', '0');
+        errorMessage(err.message);
       })
       .finally(() => {
         setBtnText('');
@@ -284,7 +309,9 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } return;
+        } else {
+          return Promise.reject(new Error('Что-то пошло не так...'));
+        }
       })
       .then((data) => {
         if (data.message) {
@@ -296,7 +323,7 @@ const App = () => {
         }
       })
       .catch((err) => {
-        setInfoTooltipOpen(true, `${err.message}`, '0');
+        errorMessage(err.message);
       })
   }
 
@@ -307,7 +334,9 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } return;
+        } else {
+          return Promise.reject(new Error('Что-то пошло не так...'));
+        }
       })
       .then((data) => {
         if (data.data) {
@@ -318,8 +347,9 @@ const App = () => {
         }
       })
       .catch((err) => {
-        setInfoTooltipOpen(true, 'Сервер не отвечает', '0');
+        errorMessage(err.message);
       })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /* retrieve user data */
@@ -334,7 +364,9 @@ const App = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } return;
+        }  else {
+          return Promise.reject(new Error('Что-то пошло не так...'));
+        }
       })
       .then((data) => {
         if (data.data) {
@@ -345,8 +377,9 @@ const App = () => {
         }
       })
       .catch((err) => {
-        setInfoTooltipOpen(true, `${err.message}`, '0');
+        errorMessage(err.message);
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedIn]);
 
   /* redirecting to main url */

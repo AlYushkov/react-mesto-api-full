@@ -1,7 +1,7 @@
-const REACT_APP_BASE_URL = process.env.REACT_APP_API_URL;
+const baseUrl = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_PROD_API_URL : process.env.REACT_APP_DEV_API_URL;
 
 export const register = async (password, email) => {
-    const promise = await fetch(`${REACT_APP_BASE_URL}/signup`, {
+    const promise = await fetch(`${baseUrl}/signup`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -14,7 +14,7 @@ export const register = async (password, email) => {
 };
 
 export const authorize = async (password, email) => {
-    const promise = await fetch(`${REACT_APP_BASE_URL}/signin`, {
+    const promise = await fetch(`${baseUrl}/signin`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -27,7 +27,7 @@ export const authorize = async (password, email) => {
 };
 
 export const logout = async () => {
-    const promise = await fetch(`${REACT_APP_BASE_URL}/signuot`, {
+    const promise = await fetch(`${baseUrl}/signuot`, {
         method: 'GET', 
         credentials: 'include',
         headers: {
@@ -39,7 +39,7 @@ export const logout = async () => {
 }
 
 export const getMe = async () => {
-    const promise = await fetch(`${REACT_APP_BASE_URL}/users/me`, {
+    const promise = await fetch(`${baseUrl}/users/me`, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -51,7 +51,7 @@ export const getMe = async () => {
 };
 
 export const verifyAccess = async () => {
-    const promise = await fetch(`${REACT_APP_BASE_URL}/users/access`, {
+    const promise = await fetch(`${baseUrl}/users/access`, {
         method: 'GET',
         credentials: 'include',
         headers: {

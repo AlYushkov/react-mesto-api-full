@@ -29,7 +29,7 @@ const { createUser, login, logout } = require('./controllers/users');
 
 const { AppError, appErrors } = require('./utils/app-error');
 
-const ALLOWED_CORS = ['http://localhost:3002',
+const ALLOWED_CORS = ['http://localhost:3000',
   'https://mesta.students.nomoredomains.club',
   'https://www.mesta.students.nomoredomains.club',
 ];
@@ -39,7 +39,6 @@ const app = express();
 
 app.use((req, res, next) => {
   const { origin } = req.headers;
-  console.log(origin);
   if (ALLOWED_CORS.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Credentials', true);
