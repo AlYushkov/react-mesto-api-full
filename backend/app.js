@@ -34,6 +34,7 @@ const ALLOWED_CORS = ['http://localhost:3000',
   'https://www.mesta.students.nomoredomains.club',
   'http://mesta.students.nomoredomains.club',
   'http://www.mesta.students.nomoredomains.club',
+  'https://github.com/AlYushkov/react-mesto-api-full',
 ];
 const ALLOWED_METHODS = ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'];
 
