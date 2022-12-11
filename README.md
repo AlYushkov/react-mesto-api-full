@@ -9,6 +9,6 @@
 
 ## Запуск проекта
 
-IP 158.160.33.19
+IP 51.250.92.10
 Frontend <https://mesta.students.nomoredomains.club>
 Backend <https://api.mesta.students.nomoredomains.club>
