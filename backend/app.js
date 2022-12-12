@@ -93,18 +93,6 @@ app.use((error, req, res, next) => {
   errorHandle(error, req, res, next);
 });
 
-/*
-
-app.use((error, req, res, next) => {
-  if (res.headersSent !== true) {
-    const errMessage = error.statusCode ? error.message : 'Ошибка на серверe';
-    res.status(error.statusCode || 500).send({ message: errMessage });
-  }
-  next();
-});
-
-*/
-
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 
 app.listen(PORT);

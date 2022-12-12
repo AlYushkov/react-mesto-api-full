@@ -17,14 +17,9 @@
 }
 @media screen and (max-width: 684px) {
     .header {
+        position:relative;
         flex-direction: column-reverse;
         align-items: flex-start;
         width: 100%;
-    }
-}
-
-@media screen and (max-width: 484px) {
-    .header {
-        position:relative;
     }
 }
