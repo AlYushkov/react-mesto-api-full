@@ -17,8 +17,6 @@ userRouter.get('/me', auth, getMe);
 
 userRouter.get('/', auth, getUsers);
 
-userRouter.delete('/', auth, getUsers);
-
 userRouter.get('/:id', auth, celebrate({
   params: Joi.object().keys({
     id: Joi.string().hex(),
